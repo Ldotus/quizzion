@@ -38,10 +38,16 @@ class _StandardCardState extends State<StandardCard> {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       height: 350,
       width: 200,
-      child: ColourChanger(),
+      child: Card(
+        child: Column(children: const [
+          TextButton(onPressed: null, child: Text("Child")),
+          TextButton(onPressed: null, child: Text("Child2")),
+          TextButton(onPressed: null, child: Text("Child3")),
+        ]),
+      ),
     );
   }
 }
