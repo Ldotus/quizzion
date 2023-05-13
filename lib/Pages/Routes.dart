@@ -6,7 +6,7 @@ import 'package:quizzion/Widgets/Question.dart';
 
 Map<String, WidgetBuilder> routes = {
   '/': (context) => const MyHomePage(),
-  '/question': (context) => Question(),
+  '/question': (context) => const Question(),
   '/boardGen': (context) => const ColourChanger(),
-  '/Todo': (context) => TodoPage()
+  '/Todo': (context) => const TodoPage()
 };

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 @override
 class Question extends StatelessWidget {
+  const Question({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzion/Pages/TodoPage.dart';
 import 'package:quizzion/Widgets/ColourChanger.dart';
-import 'package:quizzion/Widgets/StandardCard.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -13,7 +11,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   // Declare two empty lists to hold Card and ColourChanger widgets
 
-  List<ColourChanger> _list = [];
+  final List<ColourChanger> _list = [];
+
+  final TextEditingController ColourController = TextEditingController();
+
+  late ColourLabel? selectedColour;
 
   // Create a new Card widget using a given ColourChanger widget
   Widget createCard(ColourChanger cardList) {
@@ -22,6 +24,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<DropdownMenuEntry<ColourLabel>> colourEntries =
+        <DropdownMenuEntry<ColourLabel>>[];
+    for (final ColourLabel color in ColourLabel.values) {
+      colourEntries.add(DropdownMenuEntry<ColourLabel>(
+          value: color, label: color.label, enabled: color.label != 'grey'));
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text("GenABoard"),
@@ -31,30 +39,44 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Display the total number of ColourChanger widgets
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text("Total: ${_list.length}"),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (_list.isNotEmpty) {
-                        // Remove the last ColourChanger widget from the list
-                        _list.removeLast();
-                      }
-                    });
-                  },
-                  child: const Icon(Icons.arrow_back),
-                ),
-                ElevatedButton(
-                    child: const Icon(Icons.add),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DropdownMenu<ColourLabel>(
+                    dropdownMenuEntries: colourEntries,
+                    controller: ColourController,
+                    enableFilter: false,
+                    label: const Text('Colour'),
+                    onSelected: (ColourLabel? colour) {
+                      setState(() {
+                        selectedColour = colour;
+                      });
+                    },
+                  ),
+                  Text("Total: ${_list.length}"),
+                  ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        // Add a new ColourChanger widget to the list
-                        _list.add(const ColourChanger());
+                        if (_list.isNotEmpty) {
+                          // Remove the last ColourChanger widget from the list
+                          _list.removeLast();
+                        }
                       });
-                    }),
-              ],
+                    },
+                    child: const Icon(Icons.remove_circle),
+                  ),
+                  ElevatedButton(
+                      child: const Icon(Icons.add),
+                      onPressed: () {
+                        setState(() {
+                          // Add a new ColourChanger widget to the list
+                          _list.add(const ColourChanger());
+                        });
+                      }),
+                ],
+              ),
             ),
             // Display a ListView of all the ColourChanger widgets
             ListView.builder(
@@ -87,4 +109,16 @@ class _MyHomePageState extends State<MyHomePage> {
       )),
     );
   }
+}
+
+enum ColourLabel {
+  blue('blue', Colors.blue),
+  red('red', Colors.red),
+  orange('orange', Colors.orange),
+  black('black', Colors.black),
+  white('white', Colors.white);
+
+  const ColourLabel(this.label, this.colour);
+  final String label;
+  final Color colour;
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quizzion/Pages/Routes.dart';
-import 'Pages/MyHomePage.dart';
 
 void main() => runApp(const MaterialApp(
-      home: MyHomePage(),
+      home: _myForm(),
     ));
 
 //create class that defines the widget
@@ -22,7 +21,7 @@ class _myFormState extends State<_myForm> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Danbo",
+      title: "Remme: Genesis-tant",
       routes: routes,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.pink,

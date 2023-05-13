@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'ColourChanger.dart';
 
 class StandardCard extends StatefulWidget {
   const StandardCard({Key? key}) : super(key: key);
@@ -13,14 +12,14 @@ class _StandardCardState extends State<StandardCard> {
   int _likesCount = 44;
   bool _isFaved = true;
   final _textController = TextEditingController();
-  String _title = '';
+  final String _title = '';
   int r = 0;
   int g = 0;
   int b = 0;
 
   void setTitle() {
     setState(() {
-      String _title = _textController.text;
+      String title = _textController.text;
     });
   }
 
@@ -38,11 +37,11 @@ class _StandardCardState extends State<StandardCard> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox(
       height: 350,
       width: 200,
       child: Card(
-        child: Column(children: const [
+        child: Column(children: [
           TextButton(onPressed: null, child: Text("Child")),
           TextButton(onPressed: null, child: Text("Child2")),
           TextButton(onPressed: null, child: Text("Child3")),

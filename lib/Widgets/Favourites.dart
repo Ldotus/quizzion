@@ -11,23 +11,27 @@ class Favourites extends StatefulWidget {
 }
 
 class FavouritesState extends State<Favourites> {
+  final ColourChangerState ccs = ColourChangerState();
   bool isFaved = false;
-  int faveCount = 9;
+  bool addToBox = false;
 
+  int faveCount = 25;
+  String colour = "";
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.only(bottom: 20),
           color: widget.colour,
           child: IconButton(
-            padding: const EdgeInsets.only(right: 10),
-            icon: (isFaved
+            padding: const EdgeInsets.only(bottom: 60),
+            icon: (addToBox
                 ? const Icon(Icons.star)
                 : const Icon(Icons.star_border)),
-            onPressed: _toggleFave,
+            color: ccs.checkTotalValue(),
+            onPressed: _addToBox,
           ),
         ),
         SizedBox(
@@ -39,14 +43,15 @@ class FavouritesState extends State<Favourites> {
     );
   }
 
-  void _toggleFave() {
+  void _addToBox() {
     setState(() {
-      if (!isFaved) {
-        faveCount++;
+      if (!addToBox) {
+        colour = widget.colour.toString();
+        print(colour);
       } else {
-        faveCount--;
+        print("Default");
       }
-      isFaved = !isFaved;
+      addToBox = !addToBox;
     });
   }
 }
