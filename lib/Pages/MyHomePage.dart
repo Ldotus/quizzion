@@ -72,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () {
                         setState(() {
                           // Add a new ColourChanger widget to the list
+
                           _list.add(const ColourChanger());
                         });
                       }),

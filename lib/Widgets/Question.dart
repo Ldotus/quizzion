@@ -7,6 +7,7 @@ class Question extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      borderOnForeground: true,
       child: Row(children: [
         TextButton(
           onPressed: () {},

@@ -24,9 +24,9 @@ class _myFormState extends State<_myForm> {
       title: "Remme: Genesis-tant",
       routes: routes,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.pink,
+        scaffoldBackgroundColor: Colors.blue,
         appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.lightGreen,
+            backgroundColor: Colors.cyanAccent,
             shape: BeveledRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.elliptical(4, 50),
